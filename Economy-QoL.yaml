@@ -1,0 +1,30 @@
+# ── Required Fields ───────────────────────────────────────────────────────────
+
+name: "Economy QoL"
+author: "Xerduntis"
+version: "1.2"
+mod_type: lua
+
+# ── Optional Fields ───────────────────────────────────────────────────────────
+
+description: "Adds F2 and F3 keybinds to give yourself money and XP on demand. Does not set the game's Cheat flag — achievements are unaffected."
+
+# Nexus Mods IDs — used for update checking.
+
+config:
+  - key: Debug
+    label: "Debug Mode"
+    type: bool
+    default: false
+
+  - key: moneyAmount
+    label: "Money per Press (cents)"
+    description: "Amount added per F2 press, in cents. 100000 = $1000.00, 500000 = $5000.00."
+    type: int
+    default: 100000
+
+  - key: xpAmount
+    label: "XP per Press"
+    description: "Amount of XP added per F3 press."
+    type: int
+    default: 50
