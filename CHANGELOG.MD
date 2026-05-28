@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3
+- Replaced NotifyOnNewObject-based gamemode tracking with lazy re-acquisition via FindAllOf. The previous approach had a race condition between WeatherSystem:ReceiveBeginPlay (which cleared the cached reference) and the delayed NotifyOnNewObject callback (which set it). On slower hardware the cleanup could run *after* the acquisition, leaving the cached reference permanently nil after a save reload. The new pattern validates the reference at each access and refreshes it on demand, eliminating the timing dependency entirely.
+- Removed WeatherSystem:ReceiveBeginPlay and End of the day cleanup hooks — no longer needed with the lazy getter.
+- Keybinds are registered immediately at mod load instead of waiting for the gamemode reference; the lazy getter handles the not-yet-available case gracefully.
+
 ## 1.2
 - Fixed `moneyAmount` default in YAML (was 10000, should be 100000)
 - Added unit hint to `moneyAmount` description (cents)
